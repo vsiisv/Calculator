@@ -1,27 +1,36 @@
-def calculation(op: str, a: float, b: float):
+def calculation(op: str, a, b):
     match op:
         case "+":
-            return f"Результат сложения = {value_1 + value_2}"
+            return f"Результат сложения = {a + b}"
         case "-":
-            return f"Результат вычитания = {value_1 - value_2}"
+            return f"Результат вычитания = {a - b}"
         case "*":
-            return f"Результат умножения = {value_1 * value_2}"
+            return f"Результат умножения = {a * b}"
         case "/":
-            return f"Результат деления = {value_1 / value_2}"
+            try:
+                return f"Результат деления = {a / b}"
+            except ZeroDivisionError:
+                return  "На ноль делить нельзя"
     return None
 
-operation = input("Выберите действие (+, -, *, /): ")
+def get_operator():
+    operator = input("Выберите действие (+, -, *, /): ")
+    while operator not in ["+", "-", "*", "/"]:
+        print("Введен некорректный оператор. Попробуйте еще раз.")
+        operator = input("Выберите действие (+, -, *, /): ")
+    return operator
 
-if operation == "+" or operation == "-" or operation == "*" or operation == "/":
-    try:
-        value_1 = float(input("Введите первое число: "))
-        value_2 = float(input("Введите второе число: "))
-        result = calculation(operation, value_1, value_2)
-    except ValueError:
-        print("Введено не корректное значение")
-    except ZeroDivisionError:
-        print("На ноль делить нельзя")
-    else:
-        print(result)
-else:
-    print("Ввдено некорректная операция")
+def get_value(message):
+    while True:
+        value = input(message)
+        try:
+            value = float(value)
+            return value
+        except ValueError:
+            print("Введите числовое значение.")
+
+operator = get_operator()
+value_1 = get_value("Введите первое число: ")
+value_2 = get_value("Введите второе число: ")
+result = calculation(operator, value_1, value_2)
+print(result)
