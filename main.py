@@ -29,8 +29,11 @@ def get_value(message):
         except ValueError:
             print("Введите числовое значение.")
 
-operator = get_operator()
-value_1 = get_value("Введите первое число: ")
-value_2 = get_value("Введите второе число: ")
-result = calculation(operator, value_1, value_2)
-print(result)
+def main():
+    operator = get_operator()
+    value_1 = get_value("Введите первое число: ")
+    value_2 = get_value("Введите второе число: ")
+    result = calculation(operator, value_1, value_2)
+    print(result)
+
+main()
